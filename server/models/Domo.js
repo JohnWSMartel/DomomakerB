@@ -4,9 +4,9 @@ const _ = require('underscore');
 
 let DomoModel = {};
 
-//mongoose.Types.ObjectID is a function that
-//converts string ID to real mongo ID
-const converId = mongoose.Types.ObjectId;
+// mongoose.Types.ObjectID is a function that
+// converts string ID to real mongo ID
+const convertId = mongoose.Types.ObjectId;
 const setName = (name) => _.escape(name).trim();
 
 const DomoSchema = new mongoose.Schema({
@@ -26,7 +26,7 @@ const DomoSchema = new mongoose.Schema({
     required: true,
     ref: 'Account',
   },
-  createdData:{
+  createdData: {
     type: Date,
     default: Date.now,
   },
@@ -42,7 +42,7 @@ DomoSchema.statics.findByOwner = (ownerId, callback) => {
   const search = {
     owner: convertId(ownerId),
   };
-	
+
   return DomoModel.find(search).select('name age').exec(callback);
 };
 
